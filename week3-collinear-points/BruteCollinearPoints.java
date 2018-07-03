@@ -30,7 +30,12 @@ public class BruteCollinearPoints {
     public BruteCollinearPoints(Point[] points) {
         // null input
         if (points == null) {
-            throw new NullPointerException("Null array");
+            throw new IllegalArgumentException("Null array");
+        }
+
+        // Corner case: only one entry and the entry is null
+        for (Point p : points) {
+            if (p == null) throw new IllegalArgumentException("Null entry");
         }
         
         // Make an array copy
@@ -114,16 +119,19 @@ public class BruteCollinearPoints {
      * @params p sorted Point[] input.
      */
     private boolean validInput(Point[] p) {
+        /*
         // edge case
         if (p.length == 1 && p[0] == null) {
             throw new IllegalArgumentException("Null entries");
         }
+        */
         
         for (int i = 0; i < p.length; i++) {
             // null entries
-            if (p[i] == null) {
-                throw new IllegalArgumentException("Null entries");
-            }
+            // if (p[i] == null) {
+            //     throw new IllegalArgumentException("Null entries");
+            // }
+            
             // duplicates
             if (i < p.length - 1 && p[i].compareTo(p[i + 1]) == 0) {
                 throw new IllegalArgumentException("Duplicated entries");

@@ -30,7 +30,12 @@ public class FastCollinearPoints {
     public FastCollinearPoints(Point[] points) {
         // null input
         if (points == null) {
-            throw new NullPointerException("Null array");
+            throw new IllegalArgumentException("Null array");
+        }
+        
+        // Check for null entry
+        for (Point p : points) {
+            if (p == null) throw new IllegalArgumentException("Null entry");
         }
         
         // check for duplicates and null entries
@@ -116,16 +121,19 @@ public class FastCollinearPoints {
      * @return boolean - true for valid input
      */
     private boolean validInput(Point[] p) {
+        /*
         // edge case
         if (p.length == 1 && p[0] == null) {
             throw new IllegalArgumentException("Null entries");
         }
+        */
         
         for (int i = 0; i < p.length; i++) {
             // null entries
-            if (p[i] == null) {
-                throw new IllegalArgumentException("Null entries");
-            }
+            // if (p[i] == null) {
+            //     throw new IllegalArgumentException("Null entries");
+            // }
+            
             // duplicates
             if (i < p.length - 1 && p[i].compareTo(p[i + 1]) == 0) {
                 throw new IllegalArgumentException("Duplicated entries");
